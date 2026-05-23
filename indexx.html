@@ -1,0 +1,94 @@
+<!doctype html>
+<html lang="uz">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Modern Digital Clock</title>
+
+		<style>
+			* {
+				margin: 0;
+				padding: 0;
+				box-sizing: border-box;
+				font-family: 'Segoe UI', sans-serif;
+			}
+
+			body {
+				height: 100vh;
+				display: flex;
+				justify-content: center;
+				align-items: center;
+				background: #0f172a;
+			}
+
+			.clock {
+				width: 500px;
+				height: 180px;
+				border-radius: 40px;
+				background: rgba(255, 255, 255, 0.05);
+				backdrop-filter: blur(20px);
+				border: 1px solid rgba(255, 255, 255, 0.1);
+
+				display: flex;
+				justify-content: center;
+				align-items: center;
+
+				box-shadow:
+					0 0 30px rgba(0, 255, 255, 0.15),
+					inset 0 0 20px rgba(255, 255, 255, 0.03);
+			}
+
+			#time {
+				font-size: 90px;
+				font-weight: 700;
+				color: white;
+				letter-spacing: 8px;
+
+				text-shadow:
+					0 0 10px cyan,
+					0 0 20px cyan,
+					0 0 40px cyan;
+			}
+
+			@media (max-width: 600px) {
+				.clock {
+					width: 90%;
+					height: 140px;
+				}
+
+				#time {
+					font-size: 60px;
+					letter-spacing: 4px;
+				}
+			}
+		</style>
+	</head>
+
+	<body>
+		<div class="clock">
+			<div id="time">00:00</div>
+		</div>
+
+		<script>
+			function updateClock() {
+				const now = new Date();
+
+				let hours = now.getHours();
+				let minutes = now.getMinutes();
+
+				// Sonlar 1 xonali bo'lsa, oldiga '0' qo'shish
+				hours = String(hours).padStart(2, '0');
+				minutes = String(minutes).padStart(2, '0');
+
+				// Vaqtni ekrandagi #time elementiga chiqarish
+				document.getElementById('time').textContent = hours + ':' + minutes;
+			} // <--- Funksiyaning yopilish qavsi shu yerda bo'lishi kerak edi
+
+			// Sahifa yuklanganda soatni darhol ko'rsatish
+			updateClock();
+
+			// Har soniyada vaqtni yangilab turish
+			setInterval(updateClock, 1000);
+		</script>
+	</body>
+</html>
